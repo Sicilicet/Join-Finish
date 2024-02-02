@@ -12,18 +12,15 @@ async function showHeaderTemplate() {
   document.getElementById('header-template').innerHTML = headertemplate;
 }
 
-
 /** WEBPAGES IN GENERAL */
 
 function emptyInnerHTML(whichID) {
   document.getElementById(whichID).innerHTML = '';
 }
 
-
 function saveInLocalStorage(whatToSave, whereToSave) {
   localStorage.setItem(whatToSave, JSON.stringify(whereToSave));
 }
-
 
 function toggleLogoutBtn(event) {
   event.stopPropagation();
@@ -35,7 +32,6 @@ function toggleLogoutBtn(event) {
   }
 }
 
-
 function hideLogoutBtn() {
   document.getElementById('logout-menu').classList.add('d-none');
   document.getElementById('logout-btn').classList.add('d-none');
@@ -45,26 +41,35 @@ function hideLogoutBtn() {
   }
 }
 
-
 function closeOverlay(whichContainer) {
   document.getElementById(whichContainer).style.display = 'none';
 }
-
 
 function openOverlay(whichContainer) {
   document.getElementById(whichContainer).style.display = 'flex';
 }
 
-
-function toggleVisibility(whichContainer) {
-  let Container = document.getElementById(whichContainer);
-  if (Container.style.display === 'none') {
-    Container.style.display = 'flex';
-  } else {
-    Container.style.display = 'none';
+function closeToggle(whichContainer) {
+  let container = document.getElementById(whichContainer);
+  if (container.style.display === 'flex') {
+    container.style.display = 'none';
   }
 }
 
+function closeAllToggle() {
+  closeToggle('available-categories');
+  closeToggle('category-new-input-submit');
+  closeToggle('assign-to');
+}
+
+function toggleVisibility(whichContainer) {
+  let container = document.getElementById(whichContainer);
+  if (container.style.display === 'none') {
+    container.style.display = 'flex';
+  } else {
+    container.style.display = 'none';
+  }
+}
 
 function whichWindow() {
   let currentPage = window.location.pathname.split('/').pop();
@@ -79,7 +84,6 @@ function whichWindow() {
   }
 }
 
-
 function CurrentlyActiveWebpage(webpage, id) {
   let currentPage = window.location.pathname.split('/').pop();
   if (currentPage === webpage) {
@@ -88,7 +92,6 @@ function CurrentlyActiveWebpage(webpage, id) {
     document.getElementsByName('active-webpage').classList.remove('active-webpage');
   }
 }
-
 
 function clearInputs() {
   undownTheDropdown();
@@ -106,7 +109,6 @@ function clearInputs() {
   }
 }
 
-
 function clearSubmit() {
   let submitInputsList = document.querySelectorAll('.submitInputs');
   submitInputsList.forEach(function (input) {
@@ -115,17 +117,14 @@ function clearSubmit() {
   removeMoveOverlay('overlayADDContactContainer', 'overlayAdd', 'contactContainer');
 }
 
-
 function clearTextarea() {
   document.getElementById('description-input').value = '';
 }
-
 
 function clearInputCategories() {
   document.getElementById('add-new-category').value = '';
   document.getElementById('submitCategoryInput').classList.add('d-none');
 }
-
 
 function clearInputSubtasks() {
   document.getElementById('add-subtask').value = '';
@@ -143,7 +142,6 @@ function undownTheDropdown() {
   });
 }
 
-
 function downTheDropdown() {
   let dropDowns = ['available-categories', 'category-new-input-submit', 'assign-to'];
   dropDowns.forEach((element) => {
@@ -152,7 +150,6 @@ function downTheDropdown() {
   });
 }
 
-
 function addMoveOverlay(id, background, boardID) {
   document.getElementById(id).classList.remove('close-overlay-animation');
   document.getElementById(id).classList.add('move-overlay-animation');
@@ -160,7 +157,6 @@ function addMoveOverlay(id, background, boardID) {
   openOverlay(background);
   openOverlay(id);
 }
-
 
 function removeMoveOverlay(id, background, boardID) {
   document.getElementById(id).classList.remove('move-overlay-animation');
@@ -171,7 +167,6 @@ function removeMoveOverlay(id, background, boardID) {
     closeOverlay(background);
   }, 450);
 }
-
 
 function changeButtonEditTask(i) {
   openOverlay('closeXtemplate');
@@ -186,10 +181,9 @@ function changeButtonEditTask(i) {
     clearCancelButton.innerHTML = 'Cancel';
     clearCancelButton.setAttribute('onclick', `closeTemplateAddTask()`);
   }
-  whatToDoWithCategoryButton(i)
+  whatToDoWithCategoryButton(i);
   undownTheDropdown();
 }
-
 
 function whatToDoWithCategoryButton(i) {
   let categoryButton = document.getElementById('checkmarkCategory');
@@ -200,7 +194,6 @@ function whatToDoWithCategoryButton(i) {
     categoryButton.setAttribute('onclick', `getNewCategoryFromInputShowOldInput(${i})`);
   }
 }
-
 
 function rechangeButtonAddTask() {
   closeOverlay('closeXtemplate');
@@ -214,12 +207,10 @@ function rechangeButtonAddTask() {
     subtaskButton.setAttribute('onclick', `getSubtasksFromInput()`);
     clearCancelButton.innerHTML = 'Clear';
     clearCancelButton.setAttribute('onclick', `clearAddTask()`);
-
   }
   rechangeWhatHappenedToCategoryButton();
   toggleVisibility('category-new-input-submit');
 }
-
 
 function rechangeWhatHappenedToCategoryButton() {
   let categoryButton = document.getElementById('checkmarkCategory');
@@ -231,7 +222,6 @@ function rechangeWhatHappenedToCategoryButton() {
   }
 }
 
-
 function changeFunctionsOnTemplateButtons() {
   openOverlay('closeXtemplate');
   let clearCancelButton = document.getElementById('clearCancelButton');
@@ -240,7 +230,6 @@ function changeFunctionsOnTemplateButtons() {
     clearCancelButton.innerHTML = 'Cancel';
   }
 }
-
 
 function formValidation(whichInput, whichSubmitText) {
   let input = document.getElementById(whichInput).value;

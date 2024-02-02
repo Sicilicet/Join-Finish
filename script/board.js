@@ -23,14 +23,13 @@ function initTemplateAddTask(situation) {
   });
 }
 
-
 /**
  * displayes all tasks from localstorage in board
  */
 function displayTasksInBoard() {
   cleanWorkBoardspaces();
   for (let i = 0; i < todos.length; i++) {
-    isSituationSituation (i);
+    isSituationSituation(i);
     displayTasksCategories(i);
     displayProgressbar(i);
     displayTasksTeammates(i);
@@ -49,7 +48,7 @@ function cleanWorkBoardspaces() {
  * sorting array elements by their work status (situation) and generating afterwards specific HTML Code
  * @param {*} i - the arrays index
  */
-function isSituationSituation (i) {
+function isSituationSituation(i) {
   if (todos[i].situation === 'todo') {
     generateTodoHTML(i);
   } else if (todos[i].situation === 'progress') {
@@ -61,9 +60,9 @@ function isSituationSituation (i) {
   }
 }
 
-/** 
+/**
  * generates the html of tasks in board
-*/
+ */
 function generateTodoHTML(i) {
   document.getElementById(todos[i].situation).innerHTML += `
       <div id="task${i}" draggable="true" ondragstart="startdragging(${i})" onclick="displayTaskBoardDetail(${i})" class="BoardTask">
@@ -120,9 +119,8 @@ function styleProgressbar(i) {
   document.getElementById(`progressbar-progress` + i).style.width = progresswidth + '%';
 }
 
-
 /**
- * counts checked checkmarks for subtasks from array 
+ * counts checked checkmarks for subtasks from array
  * and calculates the percentage of them based on all subtasks
  * @param {*} i - index of task in array
  * @returns perCentage is % of div Container Color for Progressbar - the height to be exact
@@ -172,8 +170,9 @@ function displayTasksTeammates(i) {
   emptyInnerHTML('Boardteammates' + i);
   for (let k = 0; k < todos[i].teammates.length; k++) {
     document.getElementById('Boardteammates' + i).innerHTML += `
-    <div title="${contacts[todos[i].teammates[k]].firstName} ${contacts[todos[i].teammates[k]].lastName}" class="BoardTaskTeammates" style=background-color:${contacts[todos[i].teammates[k]].color
-      }>
+    <div title="${contacts[todos[i].teammates[k]].firstName} ${
+      contacts[todos[i].teammates[k]].lastName
+    }" class="BoardTaskTeammates" style=background-color:${contacts[todos[i].teammates[k]].color}>
       ${contacts[todos[i].teammates[k]].initials}
     </div>`;
   }
@@ -254,14 +253,13 @@ function displayPriorityBoardDetail(i) {
   if (todos[i].priority === 'urgent') {
     whichPriorityHTMLBoardDetail(i, 'urgent', 'Urgent', `<img src="img/urgent.icon2.png" alt=""/>`);
   } else if (todos[i].priority === 'medium') {
-    whichPriorityHTMLBoardDetail(i, 'medium', 'Medium', '<img src="img/urgent-icon3.png" alt=""/>')
+    whichPriorityHTMLBoardDetail(i, 'medium', 'Medium', '<img src="img/urgent-icon3.png" alt=""/>');
   } else if (todos[i].priority === 'low') {
-    whichPriorityHTMLBoardDetail(i, 'low', 'Low', '<img src="img/urgent-icon4.png" alt=""/>')
+    whichPriorityHTMLBoardDetail(i, 'low', 'Low', '<img src="img/urgent-icon4.png" alt=""/>');
   } else {
     whichPriorityHTMLBoardDetail(i, '', 'unset', '');
   }
 }
-
 
 function whichPriorityHTMLBoardDetail(i, urgency, Urgency, picture) {
   document.getElementById('BoardDetailPrio' + i).innerHTML = `
@@ -289,7 +287,6 @@ function closeTemplateBoardDetails() {
   closeOverlay('taskDetail');
   document.getElementById('bodyBoard').classList.remove('dontScoll');
 }
-
 
 /** DRAG & DROP */
 
@@ -340,7 +337,6 @@ function changePos(situation) {
   displayTasksInBoard();
 }
 
-
 /** SEARCH TASKS */
 
 /**
@@ -350,11 +346,10 @@ function filterTasks() {
   let filterValue = document.getElementById('filterInput').value.toUpperCase();
   for (let i = 0; i < todos.length; i++) {
     let taskElement = document.getElementById('task' + [i]);
-    if (todos[i].title.toUpperCase().includes(filterValue)) {
+    if (todos[i].title.toUpperCase().includes(filterValue) || todos[i].description.toUpperCase().includes(filterValue)) {
       taskElement.style.display = '';
     } else {
       taskElement.style.display = 'none';
     }
   }
 }
-
